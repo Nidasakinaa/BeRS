@@ -31,7 +31,7 @@ func InsertOneDoc(db string, collection string, doc interface{}) (insertedID int
 
 func GetPasienByID(_id primitive.ObjectID, db *mongo.Database, col string) (model.Biodata, error) {
 	var pasien model.Biodata
-	collection := db.Collection("pasien")
+	collection := db.Collection("DataPasien")
 	filter := bson.M{"_id": _id}
 	err := collection.FindOne(context.TODO(), filter).Decode(&pasien)
 	if err != nil {

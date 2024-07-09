@@ -10,7 +10,7 @@ import (
 )
 
 func TestGetPasienByID(t *testing.T) {
-	_id := "668d22c2ecd9a334601ece41"
+	_id := "668d1f52ff875d6b3b3ed63e"
 	objectID, err := primitive.ObjectIDFromHex(_id)
 	if err != nil {
 		t.Fatalf("error converting id to ObjectID: %v", err)
@@ -22,10 +22,10 @@ func TestGetPasienByID(t *testing.T) {
 	fmt.Println(biodata)
 }
 
-func TestGetAll(t *testing.T) {
-	data := module.GetAllPasien(module.MongoConn, "pasien")
-	fmt.Println(data)
-}
+// func TestGetAll(t *testing.T) {
+// 	data := module.GetAllPasien(module.MongoConn, "pasien")
+// 	fmt.Println(data)
+// }
 
 func TestInsertPasien(t *testing.T) {
 	pasienName := "Naya Kania"
@@ -51,4 +51,23 @@ func TestInsertPasien(t *testing.T) {
 		t.Errorf("Error inserting data: %v", err)
 	}
 	fmt.Printf("Data berhasil disimpan dengan id %s", insertedID.Hex())
+}
+
+func TestDeletePresensiByID(t *testing.T) {
+	id := "668d22c2ecd9a334601ece41" // ID data yang ingin dihapus
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		t.Fatalf("error converting id to ObjectID: %v", err)
+	}
+
+	err = module.DeletePasienByID(objectID, module.MongoConn, "pasien")
+	if err != nil {
+		t.Fatalf("error calling DeletePresensiByID: %v", err)
+	}
+
+	// Verifikasi bahwa data telah dihapus dengan melakukan pengecekan menggunakan GetPresensiFromID
+	_, err = module.GetPasienByID(objectID, module.MongoConn, "pasien")
+	if err == nil {
+		t.Fatalf("expected data to be deleted, but it still exists")
+	}
 }

@@ -43,19 +43,19 @@ func GetPasienByID(_id primitive.ObjectID, db *mongo.Database, col string) (mode
 	return pasien, nil
 }
 
-// func GetAllPasien(db *mongo.Database, col string) (data []model.Biodata) {
-// 	pasien := db.Collection(col)
-// 	filter := bson.M{}
-// 	cursor, err := pasien.Find(context.TODO(), filter)
-// 	if err != nil {
-// 		fmt.Println("GetAllPasien :", err)
-// 	}
-// 	err = cursor.All(context.TODO(), &data)
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-// 	return
-// }
+func GetAllPasien(db *mongo.Database, col string) (data []model.Biodata) {
+	pasien := db.Collection(col)
+	filter := bson.M{}
+	cursor, err := pasien.Find(context.TODO(), filter)
+	if err != nil {
+		fmt.Println("GetAllPasien :", err)
+	}
+	err = cursor.All(context.TODO(), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return
+}
 
 func InsertPasien(db *mongo.Database, col string, pasienName string, gender string, ttl string, status string, phonenumber string, alamat string, doctor model.Doctor, medicalRecord model.MedicalRecord) (insertedID primitive.ObjectID, err error) {
 	pasien := bson.M{

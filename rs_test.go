@@ -22,10 +22,10 @@ func TestGetPasienByID(t *testing.T) {
 	fmt.Println(biodata)
 }
 
-// func TestGetAll(t *testing.T) {
-// 	data := module.GetAllPasien(module.MongoConn, "pasien")
-// 	fmt.Println(data)
-// }
+func TestGetAll(t *testing.T) {
+	data := module.GetAllPasien(module.MongoConn, "pasien")
+	fmt.Println(data)
+}
 
 func TestInsertPasien(t *testing.T) {
 	pasienName := "Naya Kania"

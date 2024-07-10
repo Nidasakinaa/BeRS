@@ -28,23 +28,23 @@ func TestGetAll(t *testing.T) {
 }
 
 func TestInsertPasien(t *testing.T) {
-	pasienName := "Naya Kania"
+	pasienName := "Mira"
 	gender := "Perempuan"
-	ttl := "Bandung, 10 Mei 2019"
-	status := "Belum Menikah"
-	phonenumber := "13456"
-	alamat := "Jl.Bandung Kota Maluku 71903"
+	ttl := "Semarang, 5 November 1992"
+	status := "Menikah"
+	phonenumber := "0822334455"
+	alamat := "Jl.Diponegoro, Kota Semarang 54321"
 	doctor := model.Doctor{
-		Name:      "Gita",
-		Specialty: "Oncology",
-		Contact:   "123-456-7890",
+		Name:      "Dina",
+		Specialty: "Gynecology",
+		Contact:   "222-3333-4444",
 	}
 	medicalRecord := model.MedicalRecord{
 		VisitDate:  "12 Juli 2023",
-		DoctorName: "Andre",
-		Diagnosis:  "Cancer",
-		Treatment:  "Kemo",
-		Notes:      "-",
+		DoctorName: "Eko",
+		Diagnosis:  "Pregnancy",
+		Treatment:  "Prenatal vitamins",
+		Notes:      "Regular check-ups needed",
 	}
 	insertedID, err := module.InsertPasien(module.MongoConn, "DataPasien", pasienName, gender, ttl, status, phonenumber, alamat, doctor, medicalRecord)
 	if err != nil {
@@ -53,8 +53,8 @@ func TestInsertPasien(t *testing.T) {
 	fmt.Printf("Data berhasil disimpan dengan id %s", insertedID.Hex())
 }
 
-func TestDeletePresensiByID(t *testing.T) {
-	id := "668d22c2ecd9a334601ece41" // ID data yang ingin dihapus
+func TestDeletePasienByID(t *testing.T) {
+	id := "668e2b1540bdb1d47710a316" // ID data yang ingin dihapus
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to ObjectID: %v", err)

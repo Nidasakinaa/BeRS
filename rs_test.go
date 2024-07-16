@@ -10,7 +10,7 @@ import (
 )
 
 func TestGetPasienByID(t *testing.T) {
-	_id := "668d1f52ff875d6b3b3ed63e"
+	_id := "669534d2af52bee3d2606c34"
 	objectID, err := primitive.ObjectIDFromHex(_id)
 	if err != nil {
 		t.Fatalf("error converting id to ObjectID: %v", err)
@@ -28,12 +28,12 @@ func TestGetAll(t *testing.T) {
 }
 
 func TestInsertPasien(t *testing.T) {
-	pasienName := "Mira"
+	pasienName := "Sari Purnamasari"
 	gender := "Perempuan"
-	ttl := "Semarang, 5 November 1992"
+	ttl := "Semarang, 7 November 1962"
 	status := "Menikah"
 	phonenumber := "0822334455"
-	alamat := "Jl.Diponegoro, Kota Semarang 54321"
+	alamat := "Jl.Diponegoro, Kota Jogja 54321"
 	doctor := model.Doctor{
 		Name:      "Dina",
 		Specialty: "Gynecology",
@@ -54,7 +54,7 @@ func TestInsertPasien(t *testing.T) {
 }
 
 func TestDeletePasienByID(t *testing.T) {
-	id := "668e2b1540bdb1d47710a316" // ID data yang ingin dihapus
+	id := "668e2b1540bdb1d47710a316"
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to ObjectID: %v", err)

@@ -40,11 +40,10 @@ func TestInsertPasien(t *testing.T) {
 		Contact:   "222-3333-4444",
 	}
 	medicalRecord := model.MedicalRecord{
-		VisitDate:  "12 Juli 2023",
-		DoctorName: "Eko",
-		Diagnosis:  "Pregnancy",
-		Treatment:  "Prenatal vitamins",
-		Notes:      "Regular check-ups needed",
+		VisitDate: "12 Juli 2023",
+		Diagnosis: "Pregnancy",
+		Treatment: "Prenatal vitamins",
+		Notes:     "Regular check-ups needed",
 	}
 	insertedID, err := module.InsertPasien(module.MongoConn, "DataPasien", pasienName, gender, ttl, status, phonenumber, alamat, doctor, medicalRecord)
 	if err != nil {

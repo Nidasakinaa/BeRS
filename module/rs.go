@@ -57,12 +57,11 @@ func GetAllPasien(db *mongo.Database, col string) (data []model.Biodata) {
 	return
 }
 
-func InsertPasien(db *mongo.Database, col string, pasienName string, gender string, ttl string, status string, phonenumber string, alamat string, doctor model.Doctor, medicalRecord model.MedicalRecord) (insertedID primitive.ObjectID, err error) {
+func InsertPasien(db *mongo.Database, col string, pasienName string, gender string, ttl string, phonenumber string, alamat string, doctor model.Doctor, medicalRecord model.MedicalRecord) (insertedID primitive.ObjectID, err error) {
 	pasien := bson.M{
 		"pasienName":    pasienName,
 		"gender":        gender,
 		"ttl":           ttl,
-		"status":        status,
 		"phonenumber":   phonenumber,
 		"alamat":        alamat,
 		"doctor":        doctor,
@@ -77,14 +76,13 @@ func InsertPasien(db *mongo.Database, col string, pasienName string, gender stri
 	return insertedID, nil
 }
 
-func UpdatePasien(ctx context.Context, db *mongo.Database, col string, _id primitive.ObjectID, pasienName string, gender string, ttl string, status string, phonenumber string, alamat string, doctor model.Doctor, medicalRecord model.MedicalRecord) (err error) {
+func UpdatePasien(ctx context.Context, db *mongo.Database, col string, _id primitive.ObjectID, pasienName string, gender string, ttl string, phonenumber string, alamat string, doctor model.Doctor, medicalRecord model.MedicalRecord) (err error) {
 	filter := bson.M{"_id": _id}
 	update := bson.M{
 		"$set": bson.M{
 			"pasienName":    pasienName,
 			"gender":        gender,
 			"ttl":           ttl,
-			"status":        status,
 			"phonenumber":   phonenumber,
 			"alamat":        alamat,
 			"doctor":        doctor,

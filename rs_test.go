@@ -15,7 +15,7 @@ func TestGetPasienByID(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error converting id to ObjectID: %v", err)
 	}
-	biodata, err := module.GetPasienByID(objectID, module.MongoConn, "pasien")
+	biodata, err := module.GetPasienByID(objectID, module.MongoConn, "DataPasien")
 	if err != nil {
 		t.Fatalf("error calling GetPasienFromID: %v", err)
 	}
@@ -31,7 +31,6 @@ func TestInsertPasien(t *testing.T) {
 	pasienName := "Sari Purnamasari"
 	gender := "Perempuan"
 	ttl := "Semarang, 7 November 1962"
-	status := "Menikah"
 	phonenumber := "0822334455"
 	alamat := "Jl.Diponegoro, Kota Jogja 54321"
 	doctor := model.Doctor{
@@ -43,9 +42,8 @@ func TestInsertPasien(t *testing.T) {
 		VisitDate: "12 Juli 2023",
 		Diagnosis: "Pregnancy",
 		Treatment: "Prenatal vitamins",
-		Notes:     "Regular check-ups needed",
 	}
-	insertedID, err := module.InsertPasien(module.MongoConn, "DataPasien", pasienName, gender, ttl, status, phonenumber, alamat, doctor, medicalRecord)
+	insertedID, err := module.InsertPasien(module.MongoConn, "DataPasien", pasienName, gender, ttl, phonenumber, alamat, doctor, medicalRecord)
 	if err != nil {
 		t.Errorf("Error inserting data: %v", err)
 	}
@@ -64,7 +62,6 @@ func TestDeletePasienByID(t *testing.T) {
 		t.Fatalf("error calling DeletePresensiByID: %v", err)
 	}
 
-	// Verifikasi bahwa data telah dihapus dengan melakukan pengecekan menggunakan GetPresensiFromID
 	_, err = module.GetPasienByID(objectID, module.MongoConn, "DataPasien")
 	if err == nil {
 		t.Fatalf("expected data to be deleted, but it still exists")

@@ -28,22 +28,22 @@ func TestGetAll(t *testing.T) {
 }
 
 func TestInsertPasien(t *testing.T) {
-	pasienName := "Sari Purnamasari"
+	pasienName := "Sari Endah"
 	gender := "Perempuan"
-	ttl := "Semarang, 7 November 1962"
+	usia := "22 Tahun"
 	phonenumber := "0822334455"
 	alamat := "Jl.Diponegoro, Kota Jogja 54321"
 	doctor := model.Doctor{
 		Name:      "Dina",
 		Specialty: "Gynecology",
-		Contact:   "222-3333-4444",
+		Contact:   "08217456",
 	}
 	medicalRecord := model.MedicalRecord{
 		VisitDate: "12 Juli 2023",
 		Diagnosis: "Pregnancy",
 		Treatment: "Prenatal vitamins",
 	}
-	insertedID, err := module.InsertPasien(module.MongoConn, "DataPasien", pasienName, gender, ttl, phonenumber, alamat, doctor, medicalRecord)
+	insertedID, err := module.InsertPasien(module.MongoConn, "DataPasien", pasienName, gender, usia, phonenumber, alamat, doctor, medicalRecord)
 	if err != nil {
 		t.Errorf("Error inserting data: %v", err)
 	}

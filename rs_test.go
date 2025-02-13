@@ -67,3 +67,57 @@ func TestDeletePasienByID(t *testing.T) {
 		t.Fatalf("expected data to be deleted, but it still exists")
 	}
 }
+
+//FUNCTION USER
+//GetUserByID retrieves a user from the database by its ID
+func TestGetUserByID(t *testing.T) {
+	_id := "67a23885d8d58983179fe315"
+	objectID, err := primitive.ObjectIDFromHex(_id)
+	if err != nil {
+		t.Fatalf("error converting id to ObjectID: %v", err)
+	}
+	menu, err := module.GetUserByID(objectID, module.MongoConn, "User")
+	if err != nil {
+		t.Fatalf("error calling GetMenuItemByID: %v", err)
+	}
+	fmt.Println(menu)
+}
+
+func TestGetAllUsers(t *testing.T) {
+	data, err := module.GetAllUser(module.MongoConn, "User")
+	if err != nil {
+		t.Fatalf("error calling GetAllUsers: %v", err)
+	}
+	fmt.Println(data)
+}	
+
+func TestInsertUser(t *testing.T) {
+	name := "Nida Sakina"
+    phone := "083174603834"
+    username := "nida"
+    password := "Nida150304"
+    role := "admin"
+    insertedID, err := module.InsertUsers(module.MongoConn, "User", name, phone, username, password, role)
+    if err != nil {
+        t.Errorf("Error inserting data: %v", err)
+    }
+    fmt.Printf("Data berhasil disimpan dengan id %s", insertedID.Hex())
+}
+
+func TestDeleteUserByID(t *testing.T) {
+    id := "67a23885d8d58983179fe315"
+    objectID, err := primitive.ObjectIDFromHex(id)
+    if err != nil {
+        t.Fatalf("error converting id to ObjectID: %v", err)
+    }
+
+    err = module.DeleteUserByID(objectID, module.MongoConn, "User")
+    if err != nil {
+        t.Fatalf("error calling DeleteUserByID: %v", err)
+    }
+
+    _, err = module.GetUserByID(objectID, module.MongoConn, "User")
+    if err == nil {
+        t.Fatalf("expected data to be deleted, but it still exists")
+    }
+}

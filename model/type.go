@@ -1,6 +1,8 @@
 package model
 
 import (
+	"time"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -26,4 +28,19 @@ type Biodata struct {
 	Alamat        string             `bson:"alamat,omitempty" json:"alamat,omitempty"`
 	Doctor        Doctor             `bson:"doctor,omitempty" json:"doctor,omitempty"`
 	MedicalRecord MedicalRecord      `bson:"medicalRecord,omitempty" json:"medicalRecord,omitempty"`
+}
+
+type User struct {
+	ID                     primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+	FullName               string             `bson:"name,omitempty" json:"name,omitempty"`
+	Phone                  string             `bson:"phone,omitempty" json:"phone,omitempty"`
+	Username               string             `bson:"username,omitempty" json:"username,omitempty"`
+	Password               string             `bson:"password,omitempty" json:"password,omitempty"`
+}
+
+type Token struct {
+	ID        string    `bson:"_id,omitempty" json:"_id,omitempty"`
+	Token     string    `bson:"token" json:"token,omitempty"`
+	// AdminID   string    `bson:"admin_id" json:"admin_id,omitempty"`
+	CreatedAt time.Time `bson:"created_at" json:"created_at"`
 }

@@ -210,7 +210,7 @@ func SaveTokenToDatabase(db *mongo.Database, col string, adminID string, token s
 }
 
 // UpdateUser updates an existing user in the database
-func UpdateUser(ctx context.Context, db *mongo.Database, col string, _id primitive.ObjectID, name string, phone string, username string, password string, role string) (err error) {
+func UpdateUser(ctx context.Context, db *mongo.Database, col string, _id primitive.ObjectID, name string, phone string, username string, password string) (err error) {
 	filter := bson.M{"_id": _id}
 	update := bson.M{
 		"$set": bson.M{
@@ -218,7 +218,6 @@ func UpdateUser(ctx context.Context, db *mongo.Database, col string, _id primiti
 			"phone":    phone,
 			"username": username,
 			"password": password,
-			"role":     role,
 		},
 	}
 	result, err := db.Collection(col).UpdateOne(ctx, filter, update)

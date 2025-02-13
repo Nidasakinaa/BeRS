@@ -149,6 +149,18 @@ func InsertUsers(db *mongo.Database, col string, fullname string, phonenumber st
 	return insertedID, nil
 }
 
+func GetByUsername(db *mongo.Database, col string, username string) (*model.User, error) {
+	var admin model.User
+	err := db.Collection(col).FindOne(context.Background(), bson.M{"username": username}).Decode(&admin)
+	if err == mongo.ErrNoDocuments {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &admin, nil
+}
+
 func DeleteTokenFromMongoDB(db *mongo.Database, col string, token string) error {
 	collection := db.Collection(col)
 	filter := bson.M{"token": token}

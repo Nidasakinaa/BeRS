@@ -132,13 +132,12 @@ func GetUserByID(_id primitive.ObjectID, db *mongo.Database, col string) (model.
 	return user, nil
 }
 
-func InsertUsers(db *mongo.Database, col string, fullname string, phonenumber string, username string, password string, role string) (insertedID primitive.ObjectID, err error) {
+func InsertUsers(db *mongo.Database, col string, fullname string, phonenumber string, username string, password string) (insertedID primitive.ObjectID, err error) {
 	users := bson.M{
 		"fullname": fullname,
 		"phone":    phonenumber,
 		"username": username,
 		"password": password,
-		"role":     role,
 	}
 	result, err := db.Collection(col).InsertOne(context.Background(), users)
 	if err != nil {
